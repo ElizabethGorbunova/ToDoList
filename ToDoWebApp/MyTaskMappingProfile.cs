@@ -16,10 +16,14 @@ namespace ToDoWebApp
 
             CreateMap<MyTaskDtoIn, MyTaskDtoOut>();
 
-            CreateMap<MyTaskDtoIn, MyTask>();
+            CreateMap<MyTaskDtoIn, MyTask>()
+                .ForMember(t => t.GroupName, n => n.MapFrom(p => p.GroupName));
+
             CreateMap<MyTask, MyTaskDtoOut>();
 
-            /*CreateMap<UserDto, User>();*/
+            CreateMap<Group, GroupDtoOut>();
+
+           
 
         }
     }

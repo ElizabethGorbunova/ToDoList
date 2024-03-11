@@ -9,6 +9,7 @@ namespace ToDoWebApp.ModelsDto
         public Status Status { get; set; }
         public Category Category { get; set; }
         public int? UserId { get; set; }
+        public string? GroupName { get; set; }
 
     }
 }

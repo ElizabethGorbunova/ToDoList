@@ -8,6 +8,7 @@ namespace ToDoWebApp.Entities
        public DbSet<MyTask> Tasks { get; set; }
        public DbSet<User> Users { get; set; }
        public DbSet<Role> Roles { get; set; }
+       public DbSet<Group> Groups { get; set; }
        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -37,7 +38,9 @@ namespace ToDoWebApp.Entities
                 .Property(r => r.Name)
                 .IsRequired();
 
-
+            modelBuilder.Entity<Group>()
+                .Property(g => g.GroupName)
+                .IsRequired();
 
         }
 

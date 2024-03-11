@@ -53,12 +53,15 @@ public class TaskService : ITaskService
     public MyTaskDtoOut AddNewTask(MyTaskDtoIn task, int userId)         
     {
         var myTaskMapped = _mapper.Map<MyTask>(task);
-        myTaskMapped.UserId= userId;
+        myTaskMapped.UserId = userId;
+
         _dbContext.Add(myTaskMapped);
         _dbContext.SaveChanges();
 
         var taskDtoOut = _mapper.Map<MyTaskDtoOut>(myTaskMapped);
         return taskDtoOut;
+
+
     }
 
 
