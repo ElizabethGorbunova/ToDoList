@@ -39,7 +39,7 @@ namespace ToDoWebApp.Services
         public GroupDtoOut EditGroup(GroupDtoIn groupDto, int groupId)
         {
             var groupToChange = _dbContext.Groups.FirstOrDefault(g => g.GroupId == groupId);
-            groupToChange.GroupName = groupDto.GroupName;
+            groupToChange.GroupId = groupDto.GroupId;
             _dbContext.SaveChanges();
 
             var groupToChangeMapped = _mapper.Map<GroupDtoOut>(groupToChange);
@@ -49,6 +49,12 @@ namespace ToDoWebApp.Services
 
         public void DeleteGroup(int groupId)
         {
+            var tasksFromGroupToDelete = _dbContext.Tasks.Where(t=>t.GroupId==groupId).ToList();
+            foreach(var task in tasksFromGroupToDelete)
+            {
+                _dbContext.Tasks.Remove(task);
+            }
+
             var group = _dbContext.Groups.FirstOrDefault(g => g.GroupId == groupId);
             _dbContext.Groups.Remove(group);
             _dbContext.SaveChanges();

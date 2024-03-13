@@ -49,8 +49,8 @@ namespace ToDoWebApp
                 Date = new DateTime(2024, 01, 22),
                 Status = Status.Planned,
                 Category = Category.Home,
-/*                UserId=null,
-*/                
+                GroupId=4
+      
               },
                new MyTask()
               {
@@ -58,8 +58,8 @@ namespace ToDoWebApp
                 Date = new DateTime(2024, 01, 21),
                 Status = Status.Planned,
                 Category = Category.Studying,
-/*                UserId=null,
-*/              },
+                GroupId=4
+             },
             };
 
             return tasks;

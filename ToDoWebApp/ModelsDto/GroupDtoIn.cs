@@ -2,6 +2,6 @@
 {
     public class GroupDtoIn
     {
-        public string GroupName { get; set; }
+        public int GroupId { get; set; }
     }
 }

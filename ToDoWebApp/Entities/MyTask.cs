@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using ToDoWebApp.Enums;
 using ToDoWebApp.Entities;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ToDoWebApp.Entities
 {
@@ -18,7 +18,9 @@ namespace ToDoWebApp.Entities
         public int? UserId { get; set; }
         public virtual User? User { get; set; }
         public int? GroupId { get; set; }
-        public string? GroupName { get; set; }
+        /*public string? GroupName { get; set; }*/
+
+        [ForeignKey("GroupId")]
         public virtual Group? Group { get; set; }
     }
 }

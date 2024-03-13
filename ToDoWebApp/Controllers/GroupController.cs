@@ -70,7 +70,7 @@ namespace ToDoWebApp.Controllers
 
             _groupService.DeleteGroup(groupId);
 
-            return Ok($"Group{groupId} deleted");
+            return Ok($"Group {groupId} deleted");
         }
             
     }

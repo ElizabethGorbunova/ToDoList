@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using ToDoWebApp.Entities;
 using ToDoWebApp.Enums;
 using ToDoWebApp.ModelsDto;
@@ -54,11 +55,14 @@ public class TaskService : ITaskService
     {
         var myTaskMapped = _mapper.Map<MyTask>(task);
         myTaskMapped.UserId = userId;
+        
 
         _dbContext.Add(myTaskMapped);
         _dbContext.SaveChanges();
 
         var taskDtoOut = _mapper.Map<MyTaskDtoOut>(myTaskMapped);
+        var GroupNameFromDB = _dbContext.Groups.FirstOrDefault(g => g.GroupId == task.GroupId);
+        taskDtoOut.GroupName = GroupNameFromDB.GroupName;
         return taskDtoOut;
 
 
@@ -78,9 +82,15 @@ public class TaskService : ITaskService
         taskToEdit.Category = taskDtoIn.Category;
         taskToEdit.Name =taskDtoIn.Name;
         taskToEdit.Date = taskDtoIn.Date;
+        taskToEdit.GroupId= taskDtoIn.GroupId;
         _dbContext.SaveChanges();
 
         var myTaskDtoOut = _mapper.Map<MyTaskDtoOut>(taskDtoIn);
+
+        var GroupNameFromDB = taskToEdit.Group.GroupName;
+        myTaskDtoOut.GroupName = GroupNameFromDB;
+        myTaskDtoOut.UserId = taskToEdit.UserId;
+
         return new EditTaskResult<MyTaskDtoOut> { IsSuccess = true, Model = myTaskDtoOut};
     }
 

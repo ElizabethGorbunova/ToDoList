@@ -31,12 +31,12 @@ namespace ToDoWebApp.ModelsDto.Validators
                  }
              });
 
-            RuleFor(t => t.GroupName).Custom((value, context) =>
+            RuleFor(t => t.GroupId).Custom((value, context) =>
             {
-                var groupExistInDB = _dbContext.Groups.FirstOrDefault(g => g.GroupName == value);
+                var groupExistInDB = _dbContext.Groups.FirstOrDefault(g => g.GroupId== value);
                 if (groupExistInDB is null)
                 {
-                    context.AddFailure($"There is no such group as {value}.");
+                    context.AddFailure($"There is no such group with ID {value}.");
                 }
             });
 
