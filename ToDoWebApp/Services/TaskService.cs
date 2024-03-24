@@ -20,6 +20,8 @@ public class TaskService : ITaskService
         _mapper = mapper;
         _logger = logger;
     }
+    
+
     public IEnumerable<MyTaskDtoOut> GetAllTasks()
     {
         var allTasks = _dbContext
@@ -30,11 +32,13 @@ public class TaskService : ITaskService
         {
             return null;
         }
-            
+
         var allTasksDto = _mapper.Map<List<MyTaskDtoOut>>(allTasks);
         return allTasksDto;
-         
+
     }
+
+  
 
     public MyTaskDtoOut GetTaskById(int id)
     {
@@ -47,6 +51,8 @@ public class TaskService : ITaskService
             return null;
         }
         var myTaskDto = _mapper.Map<MyTaskDtoOut>(task);
+        var GroupNameFromDB = _dbContext.Groups.FirstOrDefault(g => g.GroupId == task.GroupId);
+        myTaskDto.GroupName = GroupNameFromDB.GroupName;
         return myTaskDto;
     }
 
